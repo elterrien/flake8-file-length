@@ -3,10 +3,10 @@ name: Publish Python 🐍 distributions to PyPI
 on:
   push:
     tags:
-      - "v*.*.*"   # publie seulement sur les tags de release
+      - "v*.*.*"
 
 permissions:
-  id-token: write   # requis pour Trusted Publishing
+  id-token: write
   contents: read
 
 jobs:
@@ -17,10 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Option A : builder avec uv (rapide)
       - uses: astral-sh/setup-uv@v6
         with:
-          python-version: "3.13"
+          version: "latest"
+      - run: uv --version && uv help
       - run: uv build
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
