@@ -13,15 +13,15 @@ jobs:
   pypi-publish:
     name: Build & upload to PyPI
     runs-on: ubuntu-latest
-    environment: pypi   # optionnel mais conseillé
+    environment: pypi
     steps:
       - uses: actions/checkout@v4
 
       # Option A : builder avec uv (rapide)
-      - uses: astral-sh/setup-uv@v1
-      - run: uv build          # génère dist/*.whl et *.tar.gz
-
-      # Puis publier via Trusted Publishing (aucun secret requis)
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.13"
+      - run: uv build
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
